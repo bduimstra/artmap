@@ -2,11 +2,35 @@
 <html>
 <head>
 	<title>City of Jackson Art Map</title>
-
-	<link rel="stylesheet" type="text/css" href="artmap.css">
+	
 	<style type="text/css">
-      
-    </style>
+		* {
+			box-sizing: border-box;
+			font-family: Arial;
+			margin: 0;
+			padding: 0;
+			position: relative;
+		}
+
+		html, 
+		body {
+			height: 100%;
+		}
+
+		header {
+			box-shadow: 0 0 3px 4px rgba(0, 0, 0, 0.2);
+			padding: 2rem;
+			z-index: 10000;
+		}
+
+		header h1 {
+			font-weight: 100;
+		}
+
+		#map { 
+			height: 100%;
+		}
+	</style>
 </head>
 <body>
 	<header>
