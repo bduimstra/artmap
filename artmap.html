@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>City of Jackson Art Map</title>
+
+	<link rel="stylesheet" type="text/css" href="artmap.css">
+	<style type="text/css">
+      
+    </style>
+</head>
+<body>
+	<header>
+		<h1>Jackson Art Installations</h1>
+	</header>
+	<div id="map"></div>
+
+	<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBuduxfKyTZFjmh_RxrA4HCXPKjXTwOgek&callback=initMap">
+    </script>
+	<script src="jquery-2.1.4.min.js"></script>
+	<script src="artmap.js"></script>
+
+	<script>
+		var map;
+
+		function initMap() {
+			var styleArray = [
+					{
+						"elementType": "geometry",
+						"stylers": [
+							{ "hue": "#00b2ff" },
+							{ "saturation": 10 },
+							{ "visibility": "on" }
+						]
+					}
+				],
+				styledMap = new google.maps.StyledMapType(styleArray, { name: "Styled Map" }),
+				marker = new google.maps.Marker({
+					position: { lat: 42.246807, lng: -84.400917 },
+					title: 'Jackson Art Gallery',
+					icon: 'jacksonartgallery.gif'
+				}),
+				contentString = '<div id="content">'+
+					'<div id="siteNotice">'+
+					'</div>'+
+					'<h1 id="firstHeading" class="firstHeading">Art!</h1>'+
+					'<div id="bodyContent">'+
+					'<p><b>Jackson Art Gallery</b>, Jackson art gallery. Art stuff. Yada yada yada</p>'+
+					'</div>'+
+					'</div>',
+				infowindow = new google.maps.InfoWindow({
+					content: contentString
+				});
+
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: { lat: 42.246807, lng: -84.400917 },
+				zoom: 15,
+				mapTypeControlOptions: {
+					mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+				}
+			});
+
+			marker.setMap(map);
+
+			marker.addListener('click', function() {
+				infowindow.open(map, marker);
+			});
+
+			map.mapTypes.set('map_style', styledMap);
+			map.setMapTypeId('map_style');
+		}
+	</script>
+</body>
+</html>
